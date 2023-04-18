@@ -55,7 +55,7 @@ ARG TIMESTAMP_UWSGI=0
 ARG VERSION_GITCOMMIT=unknown
 
 # searx/settings.yml
-ADD --chown=searxng:searxng https://gist.githubusercontent.com/iamrony777/a29836b3f7b8ef059c045918c6929b33/raw/settings.yml /etc/searx/
+ADD --chown=searxng:searxng https://gist.githubusercontent.com/iamrony777/a29836b3f7b8ef059c045918c6929b33/raw/settings.yml searx/settings.yml
 
 RUN su searxng -c "/usr/bin/python3 -m compileall -q searx" \
 #  && touch -c --date=@${TIMESTAMP_SETTINGS} searx/settings.yml \
