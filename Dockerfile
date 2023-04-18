@@ -30,8 +30,8 @@ RUN apk add --no-cache -t build-dependencies \
     libxml2-dev \
     openssl-dev \
     tar \
-    git \
- && apk add --no-cache \
+    git 
+RUN apk add --no-cache \
     ca-certificates \
     su-exec \
     python3 \
@@ -56,6 +56,8 @@ ARG VERSION_GITCOMMIT=unknown
 
 # searx/settings.yml
 ADD --chown=searxng:searxng https://gist.githubusercontent.com/iamrony777/a29836b3f7b8ef059c045918c6929b33/raw/settings.yml searx/settings.yml
+
+RUN chmod 755 searx/settings.yml
 
 RUN su searxng -c "/usr/bin/python3 -m compileall -q searx" \
 #  && touch -c --date=@${TIMESTAMP_SETTINGS} searx/settings.yml \
