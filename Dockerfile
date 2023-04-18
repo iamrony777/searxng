@@ -29,8 +29,7 @@ RUN apk add --no-cache -t build-dependencies \
     libxslt-dev \
     libxml2-dev \
     openssl-dev \
-    tar \
-    git 
+    tar
 RUN apk add --no-cache \
     ca-certificates \
     su-exec \
@@ -43,6 +42,7 @@ RUN apk add --no-cache \
     uwsgi \
     uwsgi-python3 \
     brotli \
+    git \
  && pip3 install --no-cache -r requirements.txt \
  && apk del build-dependencies \
  && rm -rf /root/.cache
