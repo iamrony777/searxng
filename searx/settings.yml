@@ -63,6 +63,9 @@ search:
   # formats: [html, csv, json, rss]
   formats:
     - html
+    - csv
+    - json
+    - rss
 
 server:
   # If you change port, bind_address or base_url don't forget to rebuild
@@ -72,7 +75,7 @@ server:
   bind_address: "127.0.0.1"
   # public URL of the instance, to ensure correct inbound links. Is overwritten
   # by ${SEARXNG_URL}.
-  base_url: false  # "http://example.com/location"
+  base_url: "https://searxng.rony.in.eu.org"  # "http://example.com/location"
   limiter: false  # rate limit the number of request on the instance, block some bots
 
   # If your instance owns a /etc/searxng/settings.yml file, then set the following
@@ -80,7 +83,7 @@ server:
 
   secret_key: "ultrasecretkey"  # Is overwritten by ${SEARXNG_SECRET}
   # Proxying image results through searx
-  image_proxy: false
+  image_proxy: true
   # 1.0 and 1.1 are supported
   http_protocol_version: "1.0"
   # POST queries are more secure as they don't show up in history but may cause
@@ -122,7 +125,7 @@ ui:
   # results_on_new_tab: false
   theme_args:
     # style of simple theme: auto, light, dark
-    simple_style: auto
+    simple_style: dark
 
 # Lock arbitrary settings on the preferences page.  To find the ID of the user
 # setting you want to lock, check the ID of the form on the page "preferences".
