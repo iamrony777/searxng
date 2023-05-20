@@ -175,6 +175,9 @@ jobs:
       - documentation
     env:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      SEARXNG_IMAGE_NAME: ${{ secrets.SEARXNG_IMAGE_NAME }}
+
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -210,6 +213,10 @@ jobs:
           registry: registry.patr.cloud
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
+      - name: Build
         if: env.DOCKERHUB_USERNAME != null
-        run: make -e GIT_URL=$(git remote get-url origin) SEARXNG_IMAGE_NAME=${{ secrets.SEARXNG_IMAGE_NAME }} docker.buildx
+        run: make -e GIT_URL=$(git remote get-url origin) SEARXNG_IMAGE_NAME=${{ secrets.SEARXNG_IMAGE_NAME }} docker.build
+      
+      - name: push
+        run: docker tag ${GITHUB_USER}/searxng:latest env.SEARXNG_IMAGE_NAME
+        run: docker push env.SEARXNG_IMAGE_NAME        
