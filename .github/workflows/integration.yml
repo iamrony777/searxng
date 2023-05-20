@@ -215,7 +215,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build
         if: env.DOCKERHUB_USERNAME != null
-        run: make -e GIT_URL=$(git remote get-url origin) docker.build
+        run: make -e GIT_URL=$(git remote get-url origin) docker.buildx
       
       - name: push
         run: | 
