@@ -490,7 +490,7 @@ docker.build() {
         if [ "$1" = "buildx" ]; then
             # buildx includes the push option
             CACHE_TAG="${SEARXNG_IMAGE_NAME}:latest-build-cache"
-            BUILD="buildx build --platform linux/amd64 --push --cache-from=type=registry,ref=$CACHE_TAG --cache-to=type=registry,ref=$CACHE_TAG,mode=max"
+            BUILD="buildx build --platform linux/amd64 --cache-from=type=registry,ref=$CACHE_TAG --cache-to=type=registry,ref=$CACHE_TAG,mode=max"
             shift
         fi
         build_msg DOCKER "Build command: ${BUILD}"
