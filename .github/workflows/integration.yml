@@ -219,5 +219,5 @@ jobs:
       
       - name: push
         run: | 
-          docker tag ${{ github.actor }}/searxng:latest env.DOCKER_REGISTRY
-          docker push env.DOCKER_REGISTRY        
+          docker tag ${{ github.actor }}/searxng:latest ${{ env.DOCKER_REGISTRY }}
+          docker push ${{ env.DOCKER_REGISTRY }}        
