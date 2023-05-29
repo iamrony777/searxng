@@ -529,6 +529,10 @@ article[data-vim-selected].category-social {
   grid-area: urls;
 }
 
+#apis .wrapper {
+  display: flex;
+}
+
 #suggestions {
   .wrapper {
     display: flex;
@@ -589,11 +593,28 @@ article[data-vim-selected].category-social {
   }
 }
 
+#infoboxes .title,
 #suggestions .title,
 #search_url .title,
+#engines_msg .title,
 #apis .title {
   margin: 2em 0 0.5em 0;
   color: var(--color-base-font);
+}
+
+summary.title {
+  cursor: pointer;
+  padding-top: 1em;
+}
+
+.sidebar-collapsable {
+  border-top: 1px solid var(--color-sidebar-border);
+  padding-bottom: 0.5em;
+}
+
+#sidebar-end-collapsable {
+  border-bottom: 1px solid var(--color-sidebar-border);
+  width: 100%;
 }
 
 #answers {
@@ -684,9 +705,15 @@ article[data-vim-selected].category-social {
   }
 }
 
-#search_url {
-  margin-top: 8px;
+#apis {
+  input {
+    font-size: 0.9em;
+    margin: 0 10px 0 0;
+    .show-content-button;
+  }
+}
 
+#search_url {
   div.selectable_url {
     pre {
       width: 200em;
@@ -752,11 +779,6 @@ article[data-vim-selected].category-social {
   background: transparent;
   color: var(--color-result-link-visited-font);
   border: none;
-}
-
-#apis {
-  margin-top: 8px;
-  clear: both;
 }
 
 #backToTop {
@@ -834,14 +856,6 @@ article[data-vim-selected].category-social {
     input {
       border: 0;
     }
-  }
-
-  #apis {
-    display: none;
-  }
-
-  #search_url {
-    display: none;
   }
 
   .result {
