@@ -491,6 +491,8 @@ docker.build() {
             # buildx includes the push option
             CACHE_TAG="${SEARXNG_IMAGE_NAME}:latest-build-cache"
             BUILD="buildx build --platform linux/amd64,linux/arm64,linux/arm/v7"
+            # BUILD="buildx build --platform linux/amd64"
+
             shift
         fi
         build_msg DOCKER "Build command: ${BUILD}"
