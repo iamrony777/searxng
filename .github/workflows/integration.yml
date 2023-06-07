@@ -214,11 +214,10 @@ jobs:
           registry: registry.patr.cloud
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build & Push
+      - name: Build 
         if: env.DOCKERHUB_USERNAME != null
-        run: make -e GIT_URL=$(git remote get-url origin) -e SEARXNG_IMAGE_NAME=${{ env.PATR_IMAGE }} docker.buildx
+        run: make -e GIT_URL=$(git remote get-url origin) -e SEARXNG_IMAGE_NAME=${{ env.PATR_IMAGE }} docker.build
       
-      # - name: push
-      #   run: | 
-      #     docker tag ${{ github.actor }}/searxng:latest 
-      #     docker push ${{ env.PATR_IMAGE }}        
+      - name: push
+        run: | 
+          docker push ${{ env.PATR_IMAGE }}        

@@ -490,15 +490,15 @@ docker.build() {
         if [ "$1" = "buildx" ]; then
             # buildx includes the push option
             CACHE_TAG="${SEARXNG_IMAGE_NAME}:latest-build-cache"
-            BUILD="buildx build --push --platform linux/amd64,linux/arm64,linux/arm/v7"
-            # BUILD="buildx build --platform linux/amd64"
+            # BUILD="buildx build --push --platform linux/amd64,linux/arm64,linux/arm/v7"
+            BUILD="buildx build --push --platform linux/amd64"
 
             shift
         fi
         build_msg DOCKER "Build command: ${BUILD}"
 
         # build Docker image
-        build_msg DOCKER "Building image ${SEARXNG_IMAGE_NAME}:${SEARXNG_GIT_VERSION}"
+        build_msg DOCKER "Building image ${SEARXNG_IMAGE_NAME}:${DOCKER_TAG}"
         # shellcheck disable=SC2086
         docker $BUILD \
          --build-arg BASE_IMAGE="${DEPENDENCIES_IMAGE_NAME}" \
@@ -511,7 +511,7 @@ docker.build() {
          --build-arg LABEL_VCS_URL="${GIT_URL}" \
          --build-arg TIMESTAMP_SETTINGS="$(git log -1 --format="%cd" --date=unix -- searx/settings.yml)" \
          --build-arg TIMESTAMP_UWSGI="$(git log -1 --format="%cd" --date=unix -- dockerfiles/uwsgi.ini)" \
-         -t "${SEARXNG_IMAGE_NAME}:latest" -t "${SEARXNG_IMAGE_NAME}:${DOCKER_TAG}" .
+         -t "${SEARXNG_IMAGE_NAME}" .
 
         if [ "$1" = "push" ]; then
 	        docker push "${SEARXNG_IMAGE_NAME}:latest"
