@@ -9,7 +9,7 @@ general:
   # use false to disable the donation link
   donation_url: false
   # mailto:contact@example.com
-  contact_url: false
+  contact_url: mailto:iamrony777@pm.me
   # record stats
   enable_metrics: true
 
@@ -499,12 +499,12 @@ engines:
     shortcut: da
     timeout: 3.0
 
-  - name: ddg definitions
-    engine: duckduckgo_definitions
-    shortcut: ddd
-    weight: 2
-    disabled: true
-    tests: *tests_infobox
+  # - name: ddg definitions
+  #   engine: duckduckgo_definitions
+  #   shortcut: ddd
+  #   weight: 2
+  #   disabled: true
+  #   tests: *tests_infobox
 
   # cloudflare protected
   # - name: digbt
@@ -560,20 +560,20 @@ engines:
   #   tests: *tests_infobox
   #   disabled: true
 
-  - name: duckduckgo
-    engine: duckduckgo
-    shortcut: ddg
+  # - name: duckduckgo
+  #   engine: duckduckgo
+  #   shortcut: ddg
 
-  - name: duckduckgo images
-    engine: duckduckgo_images
-    shortcut: ddi
-    timeout: 3.0
-    disabled: true
+  # - name: duckduckgo images
+  #   engine: duckduckgo_images
+  #   shortcut: ddi
+  #   timeout: 3.0
+  #   disabled: true
 
-  - name: duckduckgo weather
-    engine: duckduckgo_weather
-    shortcut: ddw
-    disabled: true
+  # - name: duckduckgo weather
+  #   engine: duckduckgo_weather
+  #   shortcut: ddw
+  #   disabled: true
 
   - name: apple maps
     engine: apple_maps
@@ -1184,38 +1184,38 @@ engines:
       require_api_key: false
       results: HTML
 
-  - name: qwant
-    qwant_categ: web
-    engine: qwant
-    shortcut: qw
-    categories: [general, web]
-    disabled: false
-    additional_tests:
-      rosebud: *test_rosebud
+  # - name: qwant
+  #   qwant_categ: web
+  #   engine: qwant
+  #   shortcut: qw
+  #   categories: [general, web]
+  #   disabled: false
+  #   additional_tests:
+  #     rosebud: *test_rosebud
 
-  - name: qwant news
-    qwant_categ: news
-    engine: qwant
-    shortcut: qwn
-    categories: news
-    disabled: false
-    network: qwant
+  # - name: qwant news
+  #   qwant_categ: news
+  #   engine: qwant
+  #   shortcut: qwn
+  #   categories: news
+  #   disabled: false
+  #   network: qwant
 
-  - name: qwant images
-    qwant_categ: images
-    engine: qwant
-    shortcut: qwi
-    categories: [images, web]
-    disabled: false
-    network: qwant
+  # - name: qwant images
+  #   qwant_categ: images
+  #   engine: qwant
+  #   shortcut: qwi
+  #   categories: [images, web]
+  #   disabled: false
+  #   network: qwant
 
-  - name: qwant videos
-    qwant_categ: videos
-    engine: qwant
-    shortcut: qwv
-    categories: [videos, web]
-    disabled: false
-    network: qwant
+  # - name: qwant videos
+  #   qwant_categ: videos
+  #   engine: qwant
+  #   shortcut: qwv
+  #   categories: [videos, web]
+  #   disabled: false
+  #   network: qwant
 
   # - name: library
   #   engine: recoll
@@ -1264,11 +1264,6 @@ engines:
   - name: sepiasearch
     engine: sepiasearch
     shortcut: sep
-
-  - name: soundcloud
-    engine: soundcloud
-    shortcut: sc
-    disables: true
 
   - name: stackoverflow
     engine: stackexchange
