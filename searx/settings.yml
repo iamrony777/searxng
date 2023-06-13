@@ -558,6 +558,7 @@ engines:
     timeout: 3.0
     weight: 2
     tests: *tests_infobox
+    disabled: true
 
   - name: duckduckgo
     engine: duckduckgo
