@@ -23,7 +23,7 @@ import babel.languages
 
 from searx.utils import extract_text, eval_xpath, eval_xpath_list, eval_xpath_getindex
 from searx.locales import language_tag, region_tag, get_offical_locales
-from searx import network
+from searx.network import get  # see https://github.com/searxng/searxng/issues/762
 from searx.exceptions import SearxEngineCaptchaException
 from searx.enginelib.traits import EngineTraits
 
@@ -172,7 +172,8 @@ def get_google_info(params, eng_traits):
     # The Interface Language:
     #   https://developers.google.com/custom-search/docs/xml_results_appendices#interfaceLanguages
 
-    ret_val['params']['hl'] = lang_code
+    # https://github.com/searxng/searxng/issues/2515#issuecomment-1607150817
+    ret_val['params']['hl'] = f'{lang_code}-{country}'
 
     # lr parameter:
     #   The lr (language restrict) parameter restricts search results to
@@ -212,7 +213,8 @@ def get_google_info(params, eng_traits):
     #   countries other than the United States.
     #   https://developers.google.com/custom-search/docs/xml_results#glsp
 
-    ret_val['params']['gl'] = country
+    # https://github.com/searxng/searxng/issues/2515#issuecomment-1606294635
+    # ret_val['params']['gl'] = country
 
     # ie parameter:
     #   The ie parameter sets the character encoding scheme that should be used
@@ -419,11 +421,11 @@ def fetch_traits(engine_traits: EngineTraits, add_domains: bool = True):
 
     engine_traits.custom['supported_domains'] = {}
 
-    resp = network.get('https://www.google.com/preferences')
-    if not resp.ok:
+    resp = get('https://www.google.com/preferences')
+    if not resp.ok:  # type: ignore
         raise RuntimeError("Response from Google's preferences is not OK.")
 
-    dom = html.fromstring(resp.text)
+    dom = html.fromstring(resp.text)  # type: ignore
 
     # supported language codes
 
@@ -474,18 +476,18 @@ def fetch_traits(engine_traits: EngineTraits, add_domains: bool = True):
     # supported domains
 
     if add_domains:
-        resp = network.get('https://www.google.com/supported_domains')
-        if not resp.ok:
+        resp = get('https://www.google.com/supported_domains')
+        if not resp.ok:  # type: ignore
             raise RuntimeError("Response from https://www.google.com/supported_domains is not OK.")
 
-        for domain in resp.text.split():
+        for domain in resp.text.split():  # type: ignore
             domain = domain.strip()
             if not domain or domain in [
                 '.google.com',
             ]:
                 continue
             region = domain.split('.')[-1].upper()
-            engine_traits.custom['supported_domains'][region] = 'www' + domain
+            engine_traits.custom['supported_domains'][region] = 'www' + domain  # type: ignore
             if region == 'HK':
                 # There is no google.cn, we use .com.hk for zh-CN
-                engine_traits.custom['supported_domains']['CN'] = 'www' + domain
+                engine_traits.custom['supported_domains']['CN'] = 'www' + domain  # type: ignore
